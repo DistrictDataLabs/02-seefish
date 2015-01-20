@@ -2,10 +2,11 @@
 """
 Created on Sat Jan 17 13:30:45 2015
 
-@author: kperez-lopez
-"""
+@author: kperez-lopez copied from 
 
 # from https://www.kaggle.com/c/datasciencebowl/details/tutorial
+"""
+
 #[1]:
 #Import libraries for doing image analysis
 from skimage.io import imread

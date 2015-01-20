@@ -3,8 +3,8 @@
 Created on Fri Jan 16 17:31:42 2015
 This is lifting the kaggle tutorial for the National Data Science Bowl at
 https://www.kaggle.com/c/datasciencebowl/details/tutorial
-Any code section lifted from the tutorial will start with #In [n].  My
-adaption will start with # Adapted
+Any code section lifted from the tutorial will start with #In [n].
+My adaption will start with # Adapted
 @author: kperez-lopez
 """
 #In [1]:
@@ -28,7 +28,9 @@ import pandas as pd
 from scipy import ndimage
 from skimage.feature import peak_local_max
 # make graphics inline
-%matplotlib inline
+# Editor says this is an error. 
+# TODO: figure out why.
+%matplotlib inline 
 
 #In [2]:  ( don't know why they include this)
 import warnings
