@@ -1,2 +1,7 @@
 .DS_Store
+.DS_Store?
+._*
+.Trashes
+.Spotlight-V100
+Thumbs.db
 .idea
