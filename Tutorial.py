@@ -36,7 +36,9 @@ import warnings
 warnings.filterwarnings("ignore")
 
 #Importing the Data
-The training data is organized in a series of subdirectories that contain examples for the each class of interest. We will store the list of directory names to aid in labelling the data classes for training and testing purposes.
+# The training data is organized in a series of subdirectories that contain
+# examples for the each class of interest. We will store the list of directory
+names to aid in labelling the data classes for training and testing purposes.
 
 In [3]:
 
@@ -173,48 +175,48 @@ def getMinorMajorRatio(image):
 """
 Preparing Training Data
 
-With our code for the ratio of minor to major axis, let's add the raw pixel 
-values to the list of features for our dataset. In order to use the pixel 
-values in a model for our classifier, we need a fixed length feature vector, so 
-we will rescale the images to be constant size and add the fixed number of 
+With our code for the ratio of minor to major axis, let's add the raw pixel
+values to the list of features for our dataset. In order to use the pixel
+values in a model for our classifier, we need a fixed length feature vector, so
+we will rescale the images to be constant size and add the fixed number of
 pixels to the feature vector.
 
-To create the feature vectors, we will loop through each of the directories in 
-our training data set and then loop over each image within that class. For each 
-image, we will rescale it to 25 x 25 pixels and then add the rescaled pixel 
-values to a feature vector, X. The last feature we include will be our 
-width-to-length ratio. We will also create the class label in the vector y, 
+To create the feature vectors, we will loop through each of the directories in
+our training data set and then loop over each image within that class. For each
+image, we will rescale it to 25 x 25 pixels and then add the rescaled pixel
+values to a feature vector, X. The last feature we include will be our
+width-to-length ratio. We will also create the class label in the vector y,
 which will have the true class label for each row of the feature vector, X.
 """
 
-#In [10]
+# Adapted Tutorial [10]
 # Rescale the images and create the combined metrics and training labels
 
-#get the total training images
+# get the total training images
 numberofImages = 0
 for folder in directory_names:
-    for fileNameDir in os.walk(folder):   
+    for fileNameDir in os.walk(folder):
         for fileName in fileNameDir[2]:
-             # Only read in the images
+            # Only read in the images
             if fileName[-4:] != ".jpg":
-              continue
+                continue
             numberofImages += 1
 
 # We'll rescale the images to be 25x25
 maxPixel = 25
 imageSize = maxPixel * maxPixel
-num_rows = numberofImages # one row for each image in the training dataset
-num_features = imageSize + 1 # for our ratio
+num_rows = numberofImages  # one row for each image in the training dataset
+num_features = imageSize + 1  # for our ratio
 
 # X is the feature vector with one row of features per image
 # consisting of the pixel values and our metric
 X = np.zeros((num_rows, num_features), dtype=float)
-# y is the numeric class label 
+# y is the numeric class label
 y = np.zeros((num_rows))
 
 files = []
 # Generate training data
-i = 0    
+i = 0
 label = 0
 # List of string of class names
 namesClasses = list()
@@ -225,54 +227,32 @@ for folder in directory_names:
     # Append the string class name for each class
     currentClass = folder.split(os.pathsep)[-1]
     namesClasses.append(currentClass)
-    for fileNameDir in os.walk(folder):   
+    for fileNameDir in os.walk(folder):
         for fileName in fileNameDir[2]:
             # Only read in the images
             if fileName[-4:] != ".jpg":
-              continue
-            
+                continue
+
             # Read in the images and create the features
             nameFileImage = "{0}{1}{2}".format(fileNameDir[0], os.sep, fileName)            
             image = imread(nameFileImage, as_grey=True)
             files.append(nameFileImage)
             axisratio = getMinorMajorRatio(image)
             image = resize(image, (maxPixel, maxPixel))
-            
+
             # Store the rescaled image pixels and the axis ratio
             X[i, 0:imageSize] = np.reshape(image, (1, imageSize))
             X[i, imageSize] = axisratio
-            
+
             # Store the classlabel
             y[i] = label
             i += 1
-            # report progress for each 5% done  
+            # report progress for each 5% done
             report = [int((j+1)*num_rows/20.) for j in range(20)]
-            if i in report: print np.ceil(i *100.0 / num_rows), "% done"
+            if i in report:
+                print np.ceil(i * 100.0 / num_rows), "% done"
     label += 1
-    
-"""
-Reading images
-5.0 % done
-10.0 % done
-15.0 % done
-20.0 % done
-25.0 % done
-30.0 % done
-35.0 % done
-40.0 % done
-45.0 % done
-50.0 % done
-55.0 % done
-60.0 % done
-65.0 % done
-70.0 % done
-75.0 % done
-80.0 % done
-85.0 % done
-90.0 % done
-95.0 % done
-100.0 % done
-"""
+
 
 """
 Width-to-Length Ratio Class Separation
@@ -285,7 +265,6 @@ possible combinations, it will give us a feel for how similar or dissimilar
 different classes are in this feature, and the class distributions should be 
 comparable across subplots.
 """
-
 
 #In [12]
 # Loop through the classes two at a time and compare their distributions of the Width/Length Ratio
