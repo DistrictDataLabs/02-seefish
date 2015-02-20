@@ -50,7 +50,7 @@ directory_names = list(
 # Adapted, calling the training dir names train_dir_names.
 # NB: glob will NOT expand the tilde! 2 hours of my life before I saw this:
 #    https://docs.python.org/2/library/glob.html
-path = "/Users/kmgpl/Documents/DDL_SeeFish"
+path = "./"
 
 # Using .differences(...) removes any files in the dir train that have,
 # extensions, i.e., are not subdirs, e.g., list.txt
@@ -80,12 +80,15 @@ plt.show()
 # Adapted from Tutorial [4]:
 # This image is not the 8th in the 4th dir for me, so I'll just hardcode it.
 # Get a filename
+
 example_file = glob.glob(os.path.join(train_full_path[0], "101574.jpg"))[0]
 print example_file
+
 # Create an image object by reading the file
 im = imread(example_file, as_grey=True)
 plt.imshow(im, cmap=cm.gray)
 plt.show()
+
 # What does this plt.show() do?  The plt.imshow already displayed it and this
 # doesn't do anything more.
 # DONE: TODO: Look it up in matplotlib.
