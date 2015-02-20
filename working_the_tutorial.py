@@ -47,21 +47,33 @@ directory_names = list(
     set(glob.glob(os.path.join("train", "*")))
     .difference(set(glob.glob(os.path.join("train", "*.*")))))
 """
+
 # Adapted, calling the training dir names train_dir_names.
 # NB: glob will NOT expand the tilde! 2 hours of my life before I saw this:
 #    https://docs.python.org/2/library/glob.html
-path = "./"
 
-# Using .differences(...) removes any files in the dir train that have,
-# extensions, i.e., are not subdirs, e.g., list.txt
-train_full_path = \
-    list(set(glob.glob(os.path.join(path, "data", "train", "*"))).
-        difference(set(glob.glob(os.path.join(path, "data", "train", "*.*")))))
-train_full_path.sort()
+# Kathleen:  I commented this out becusae I couldn't figure out the purpose.  I reinserted the \
+# original commented code above here to pick up the class names.
 
-# Remove path from the dir names
-train_dir_names = []
-train_dir_names = [dn.split('/')[-1] for dn in train_full_path]
+directory_names = list(
+    set(glob.glob(os.path.join("train", "*")))
+    .difference(set(glob.glob(os.path.join("train", "*.*")))))
+
+directory_names.sort()
+
+#
+# path = "./"
+# path = os.path.abspath(path)
+# # Using .differences(...) removes any files in the dir train that have,
+# # extensions, i.e., are not subdirs, e.g., list.txt
+# train_full_path = \
+#     list(set(glob.glob(os.path.join(path, "data", "train", "*"))).
+#         difference(set(glob.glob(os.path.join(path, "data", "train", "*.*")))))
+# train_full_path.sort()
+#
+# # Remove path from the dir names
+# train_dir_names = []
+# train_dir_names = [dn.split('/')[-1] for dn in train_full_path]
 
 # In tutorial [4]:
 """
@@ -77,11 +89,13 @@ plt.imshow(im, cmap=cm.gray)
 plt.show()
 # competition_data/train/acantharia_protist/101574.jpg
 """
+
+
 # Adapted from Tutorial [4]:
 # This image is not the 8th in the 4th dir for me, so I'll just hardcode it.
 # Get a filename
 
-example_file = glob.glob(os.path.join(train_full_path[0], "101574.jpg"))[0]
+example_file = glob.glob(os.path.join(directory_names[0], "101574.jpg"))[0]
 print example_file
 
 # Create an image object by reading the file
