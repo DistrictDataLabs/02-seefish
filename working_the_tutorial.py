@@ -30,12 +30,6 @@ from scipy import ndimage
 from skimage.feature import peak_local_max
 
 
-# make graphics inline
-# Editor says this is an error.
-# TODO: figure out why.
-# %matplotlib inline -I've got IPython console set to "automatic," which yields
-# a separate window for graphics
-
 # In tutorial [2]:  ( don't know why they include this)
 import warnings
 warnings.filterwarnings("ignore")
@@ -51,9 +45,6 @@ directory_names = list(
 # Adapted, calling the training dir names train_dir_names.
 # NB: glob will NOT expand the tilde! 2 hours of my life before I saw this:
 #    https://docs.python.org/2/library/glob.html
-
-# Kathleen:  I commented this out becusae I couldn't figure out the purpose.  I reinserted the \
-# original commented code above here to pick up the class names.
 
 directory_names = list(
     set(glob.glob(os.path.join("train", "*")))
